@@ -11,10 +11,12 @@ initialize();
 
 async function initialize() {
     const { host, port, user, password, database } = config.database;
+    
     const connection = await mysql.createConnection({ host, port, user, password });
 
     // Create DB if it doesn't exist
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
+    await connection.end();
 
     // Connect to DB
     const sequelize = new Sequelize(database, user, password, { dialect: 'mysql' });
