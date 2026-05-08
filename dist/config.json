@@ -1,10 +1,10 @@
 {
     "database": {
-        "host": "localhost",
-        "port": 3306,
+        "host": "switchyard.proxy.rlwy.net",
+        "port": 38141,
         "user": "root",
-        "password": "root",
-        "database": "node_mysql_api"
+        "password": "oEDQeVHzYjJxLbueEIlAUxxbPzZXtWSt",
+        "database": "railway"
     },
     "jwtSecret": "dev_jwt_secret_replace_in_production",
     "emailFrom": "heather.huels@ethereal.email",
