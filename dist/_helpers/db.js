@@ -18,7 +18,11 @@ async function initialize() {
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
     await connection.end();
     // Connect to DB
-    const sequelize = new sequelize_1.Sequelize(database, user, password, { dialect: 'mysql' });
+    const sequelize = new sequelize_1.Sequelize(database, user, password, {
+        dialect: 'mysql',
+        host,
+        port
+    });
     // Init models
     db.Account = (0, account_model_1.default)(sequelize);
     db.RefreshToken = (0, refresh_token_model_1.default)(sequelize);
