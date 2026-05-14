@@ -197,14 +197,14 @@ function basicDetails(account: any) {
 }
 
 async function sendVerificationEmail(account: any, origin: string) {
-    const verifyUrl = `${origin}/accounts/verify-email?token=${account.verificationToken}`;
+    const verifyUrl = `${process.env.FRONTEND_URL}/account/verify-email?token=${account.verificationToken}`;
     const message = `<p>Please click the link below to verify your email address:</p>
                      <p><a href="${verifyUrl}">${verifyUrl}</a></p>`;
     await sendEmail({ to: account.email, subject: 'Verify Email', html: message });
 }
 
 async function sendPasswordResetEmail(account: any, origin: string) {
-    const resetUrl = `${origin}/accounts/reset-password?token=${account.resetToken}`;
+    const resetUrl = `${process.env.FRONTEND_URL}/account/reset-password?token=${account.resetToken}`;
     const message = `<p>Please click the link below to reset your password:</p>
                      <p><a href="${resetUrl}">${resetUrl}</a></p>`;
     await sendEmail({ to: account.email, subject: 'Reset Password', html: message });
