@@ -10,7 +10,11 @@ export default db;
 initialize();
 
 async function initialize() {
-    const { host, port, user, password, database } = config.database;
+    const host = process.env.DB_HOST!;
+    const port = Number(process.env.DB_PORT) || 3306;
+    const user = process.env.DB_USER!;
+    const password = process.env.DB_PASSWORD!;
+    const database = process.env.DB_DATABASE!;
     
     const connection = await mysql.createConnection({ host, port, user, password });
 
