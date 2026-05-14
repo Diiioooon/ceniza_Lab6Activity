@@ -9,5 +9,13 @@ export default async function sendEmail({ to, subject, html, from = process.env.
             pass: process.env.SMTP_PASSWORD
         }
     });
-    await transporter.sendMail({ from, to, subject, html });
+    console.log('=== EMAIL DEBUG ===');
+    console.log('To:', to);
+    console.log('From:', from);
+    console.log('SMTP Host:', process.env.SMTP_HOST);
+    console.log('SMTP Port:', process.env.SMTP_PORT);
+    console.log('SMTP User:', process.env.SMTP_USER);
+    console.log('===================');
+    const result = await transporter.sendMail({ from, to, subject, html });
+    console.log('Email sent successfully:', result.messageId);
 }
