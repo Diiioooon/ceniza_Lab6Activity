@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-export default async function sendEmail({ to, subject, html, from }: any) {
+export default async function sendEmail({ to, subject, html, from = process.env.EMAIL_FROM }: any) {
     console.log('=== EMAIL DEBUG ===');
     console.log('To:', to);
     console.log('From:', from);
