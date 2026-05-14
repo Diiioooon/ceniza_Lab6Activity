@@ -1,19 +1,22 @@
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-export default async function sendEmail({ to, subject, html, from = 'onboarding@resend.dev' }: any) {
+export default async function sendEmail({ to, subject, html, from }: any) {
     console.log('=== EMAIL DEBUG ===');
     console.log('To:', to);
     console.log('From:', from);
+    console.log('SMTP Host:', process.env.SMTP_HOST);
+    console.log('SMTP User:', process.env.SMTP_USER);
     console.log('===================');
-    
-    const { data, error } = await resend.emails.send({ from, to, subject, html });
-    
-    if (error) {
-        console.error('Email error:', error);
-        throw error;
-    }
-    
-    console.log('Email sent successfully:', data?.id);
+
+    const transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port: Number(process.env.SMTP_PORT),
+        auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASSWORD
+        }
+    });
+
+    await transporter.sendMail({ from, to, subject, html });
+    console.log('Email sent successfully');
 }
